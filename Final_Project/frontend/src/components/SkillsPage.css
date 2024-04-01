@@ -1,0 +1,80 @@
+/* LoginPage.css */
+
+.login-container {
+    text-align: center;
+    margin-top: 100px;
+  }
+  
+  .login-container h2 {
+    margin-bottom: 20px;
+  }
+  
+  .login-container form {
+    display: table;
+    margin: 0 auto;
+  }
+  
+  .login-container input[type='text'],
+  .login-container input[type='password'] {
+    display: table-cell;
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 300px;
+    border: none;
+    border-bottom: 1px solid #ccc; /* Add a bottom border for input fields */
+    background: transparent; /* Transparent background */
+  }
+  
+  .login-container button {
+    display: table-cell;
+    padding: 12px 24px;
+    background-color: #007bff; /* Blue */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .login-container button:hover {
+    background-color: #0056b3; /* Darker Blue */
+  }
+  
+  /* Progress bar styles */
+  .progress-bar {
+    display: table-cell;
+    width: 300px;
+    margin-bottom: 20px;
+  }
+  
+  .progress-bar-value {
+    width: 100%;
+    height: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f0f0f0; /* Light Gray */
+    overflow: hidden;
+  }
+  
+  .progress-bar-fill {
+    height: 100%;
+    background-color: #007bff; /* Blue */
+  }
+  
+  /* SkillsPage.css */
+
+.progress-bar {
+    width: 300px;
+    height: 20px;
+    background-color: #f0f0f0; /* Light Gray */
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .progress-bar-fill {
+    height: 100%;
+    background-color: #007bff; /* Blue */
+    border-radius: 10px;
+    transition: width 0.3s ease-in-out;
+  }
+  

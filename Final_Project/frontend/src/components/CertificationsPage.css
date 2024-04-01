@@ -1,0 +1,70 @@
+/* CertificationsPage.css */
+.certifications-container {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  .certifications-container h2 {
+    margin-bottom: 20px;
+  }
+  
+  .certifications-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .certifications-container label {
+    margin-bottom: 10px;
+    color: #555;
+  }
+  
+  .certifications-container input[type='text'],
+  .certifications-container input[type='number'],
+  .certifications-container input[type='checkbox'] {
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 300px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    background: transparent;
+  }
+  
+  .certifications-container input[type='checkbox'] {
+    margin-top: 10px;
+  }
+  
+  .certifications-container button {
+    padding: 12px 24px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .certifications-container button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Styling for date pickers */
+  .react-datepicker-wrapper {
+    width: 300px;
+    margin-bottom: 20px;
+  }
+  
+  .react-datepicker__input-container input {
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background: transparent;
+  }
+  
+  .react-datepicker__input-container input:focus {
+    outline: none;
+  }
+  
