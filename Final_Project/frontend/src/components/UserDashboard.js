@@ -20,11 +20,13 @@ const UserDashboard = () => {
           </div>
         </Link>
         <Link to="/user/projects" className="dashboard-link">
-          <div className="dashboard-item">
-            <i className="fas fa-project-diagram"></i>
-            <span>Projects</span>
-          </div>
+        <div className="dashboard-item">
+        <i className="fas fa-project-diagram"></i>
+         <span>Projects</span>
+        </div>
         </Link>
+
+
       </div>
     </div>
   );

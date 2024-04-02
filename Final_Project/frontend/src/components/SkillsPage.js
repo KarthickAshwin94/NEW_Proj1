@@ -1,4 +1,3 @@
-// SkillsPage.js
 import React, { useState } from 'react';
 import './SkillsPage.css';
 
@@ -6,7 +5,7 @@ const SkillsPage = () => {
   const [formData, setFormData] = useState({
     technologyName: '',
     proficiency: 5, // Default proficiency value
-    projects: '',
+    project: '',
     isApproved: false,
   });
 
@@ -26,14 +25,21 @@ const SkillsPage = () => {
       <h2>Add New Skill</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="technologyName">Technology Name:</label>
-          <input
-            type="text"
+          <label htmlFor="technologyName">Technologies:</label>
+          <select
             id="technologyName"
             name="technologyName"
             value={formData.technologyName}
             onChange={handleChange}
-          />
+          >
+            <option value="">Select Technology</option>
+            <option value="PHP">PHP</option>
+            <option value="Power Bi">Power Bi</option>
+            <option value="Python">Python</option>
+            <option value="React">React</option>
+            <option value="React Native">React Native</option>
+            <option value="Snowflake">Snowflake</option>
+          </select>
         </div>
         <div>
           <label htmlFor="proficiency">Proficiency:</label>
@@ -51,14 +57,18 @@ const SkillsPage = () => {
           <span>{formData.proficiency}</span>
         </div>
         <div>
-          <label htmlFor="projects">Name of Real-time Projects:</label>
-          <input
-            type="text"
-            id="projects"
-            name="projects"
-            value={formData.projects}
+          <label htmlFor="project">Name of Real-time Projects:</label>
+          <select
+            id="project"
+            name="project"
+            value={formData.project}
             onChange={handleChange}
-          />
+          >
+            <option value="">Select Project</option>
+            <option value="Facebook">Facebook</option>
+            <option value="Churn Rate Prediction">Churn Rate Prediction</option>
+            <option value="Products Sales Report">Products Sales Report</option>
+          </select>
         </div>
         <div>
           <label htmlFor="isApproved">Is Approved:</label>

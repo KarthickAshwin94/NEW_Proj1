@@ -1,4 +1,5 @@
 // server.js
+/*
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const express = require('express');
@@ -90,6 +91,64 @@ app.post('/user-details', (req, res) => {
   res.status(200).json({ message: 'User details saved successfully' });
 });
 
+const crypto = require('crypto');
+
+// Generate a random string with 64 characters (512 bits)
+const secretKey = crypto.randomBytes(32).toString('hex');
+console.log('Generated Secret Key:', secretKey);
+
+
+
+
+
+// Add a new endpoint for user login
+app.post('/login', async (req, res) => {
+  const { username, password } = req.body;
+  try {
+    const result = await pool.query('SELECT * FROM accounts WHERE username = $1', [username]);
+    if (result.rows.length === 1) {
+      const user = result.rows[0];
+      const passwordMatch = await bcrypt.compare(password, user.password);
+      if (passwordMatch) {
+        const token = jwt.sign({ username: user.username, user_type: user.user_type }, secretKey, { expiresIn: '1h' });
+        res.status(200).json({ message: 'Login Successful', token });
+      } else {
+        res.status(401).json({ message: 'Invalid username or password' });
+      }
+    } else {
+      res.status(401).json({ message: 'Invalid username or password' });
+    }
+  } catch (error) {
+    console.error('Error logging in:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+
+// Middleware to verify JWT token and grant access to user routes
+const verifyUserToken = (req, res, next) => {
+  const token = req.headers.authorization;
+  if (!token) {
+    return res.status(401).json({ message: 'Unauthorized: Missing token' });
+  }
+  jwt.verify(token, 'your_secret_key', (err, decoded) => {
+    if (err) {
+      return res.status(401).json({ message: 'Unauthorized: Invalid token' });
+    }
+    if (decoded.user_type !== 'user') {
+      return res.status(403).json({ message: 'Forbidden: Access denied' });
+    }
+    req.user = decoded;
+    next();
+  });
+};
+
+// User dashboard route
+app.get('/user-dashboard', verifyUserToken, (req, res) => {
+  res.json({ message: 'Welcome to the user dashboard' });
+});
+
+
 
 
 // Admin route
@@ -149,4 +208,53 @@ app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
 
+*/
 
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const express = require('express');
+const bodyParser = require('body-parser');
+const { Pool } = require('pg');
+
+const app = express();
+
+// PostgreSQL connection pool
+const pool = new Pool({
+  user: 'admin',
+  host: 'localhost',
+  database: 'my_database',
+  password: 'admin123',
+  port: 5400,
+});
+
+app.use(bodyParser.json());
+
+// Endpoint for user login
+app.post('/login', async (req, res) => {
+  const { username, password } = req.body;
+  try {
+    const result = await pool.query('SELECT * FROM accounts WHERE username = $1', [username]);
+    //console.log(result);
+    if (result.rows.length === 1) {
+      const user = result.rows[0];
+      const passwordMatch = await bcrypt.compare(password, user.password);
+      if (passwordMatch) {
+        const token = jwt.sign({ username: user.username, user_type: user.user_type }, 'your_secret_key', { expiresIn: '1h' });
+        res.status(200).json({ message: 'Login Successful', token });
+      } else {
+        res.status(401).json({ message: 'Invalid username or password' });
+      }
+    } else {
+      res.status(401).json({ message: 'Invalid username or password' });
+    }
+  } catch (error) {
+    console.error('Error logging in:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+const port = 5000;
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
